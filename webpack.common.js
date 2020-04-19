@@ -3,16 +3,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  mode: "production",
   // 入口
   entry: {
-    app: './src/index.js'
+    app: './src/index.js',
+    another: './src/another-module.js'
   },
   // 输出
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    // publicPath: '/'
+    // publicPath: '/',
+    path: path.resolve(__dirname, 'dist')
   },
   // loader
   module: {
@@ -36,7 +37,12 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Output Management'
+      title: 'Code Splitting'
     })
-  ]
+  ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    }
+  }
 };
