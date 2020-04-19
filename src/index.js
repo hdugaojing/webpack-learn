@@ -28,6 +28,11 @@ function component() {
     return element;
 }
 
+let arrowFun = () => {
+    console.log(123);
+}
+arrowFun();
+
 let element = component();
 document.body.appendChild(element);
 

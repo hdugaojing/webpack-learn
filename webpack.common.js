@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
+const HappyPack = require('happypack');
 module.exports = {
   // 入口
   entry: {
@@ -13,7 +13,6 @@ module.exports = {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     // publicPath: '/',
-    path: path.resolve(__dirname, 'dist')
   },
   // loader
   module: {
@@ -28,7 +27,7 @@ module.exports = {
       {
         test:/\.(png|svg|jpg|gif)$/,
         use: [
-          'file-loader'
+          'happypack/loader?id=file'
         ]
       }
     ]
@@ -38,11 +37,16 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Code Splitting'
+    }),
+    new HappyPack({
+      // 这个HappyPack的“名字”就叫做file，和楼上的查询参数遥相呼应
+      id: 'file',
+      loaders: ['file-loader']
     })
   ],
   optimization: {
     splitChunks: {
-      chunks: 'all',
+      chunks: 'all'
     }
   }
 };
