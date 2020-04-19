@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
+  mode: "production",
   // 入口
   entry: {
     app: './src/index.js'
@@ -43,6 +44,6 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Output Management'
-    }),
+    })
   ]
 };
